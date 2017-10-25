@@ -15,9 +15,13 @@ import pickle
 
 MIN = 2
 MAX = 4
+#size of frame
 SIZE = 64
+#border
 BORDER = 2
+#downsample
 ISIZE = 20
+#n. of digits
 ND = 2
 MNIST_SAMPLES = 60000
 DATA_PATH = "./mnist/data"
@@ -70,12 +74,15 @@ def create_rand_multi_mnist(data, labels, samples=60000):
 
 train_x = np.concatenate([train_x, valid_x], 0)
 train_y = np.concatenate([train_y, valid_y], 0)
+
+# test
 train_img, train_lbl = create_rand_multi_mnist(train_x, train_y, samples=10)
 imsave('img.png', train_img[:10].reshape((10 * SIZE, SIZE)))
+#
 train_img, train_lbl = create_rand_multi_mnist(train_x, train_y, samples=60000)
 test_img, test_lbl = create_rand_multi_mnist(test_x, test_y, samples=10000)
 
-pickle.save({
+pickle.dump({
     'train_x': train_x, 'train_y': train_y, 'test_x': test_x, 'test_y': test_y,
     'multi_train_x': train_img, 'multi_train_y': train_lbl,
     'multi_test_x': test_img, 'multi_test_y': test_lbl},
